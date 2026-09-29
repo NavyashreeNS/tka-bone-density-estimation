@@ -1,7 +1,8 @@
 """
 End-to-End Quantitative TKA Bone Mineral Density Estimation Pipeline
 Orchestrates Stages 1 through 8, delivering patient-specific volumetric BMD mapping,
-longitudinal remodeling classification, and clinical reporting.
+longitudinal remodeling classification, DICOM PACS export, FEA biomechanical decks,
+and interactive 3D web dashboards.
 """
 
 import sys
@@ -22,6 +23,9 @@ from stage5_density_calibration.calibration_engine import DensityCalibrationEngi
 from stage6_density_mapping_zonal.zonal_analyzer import ZonalDensityAnalyzer
 from stage7_biomechanical_analysis.biomechanical_model import BiomechanicalAnalyzer
 from stage8_visualization_reporting.report_generator import QuantitativeReportGenerator
+from dicom_engine.dicom_io import DicomIOEngine
+from fea_engine.fea_exporter import FEAMeshExporter
+from dashboard.interactive_viewer import Interactive3DDashboard
 
 class TKABoneDensityPipeline:
     """
@@ -42,12 +46,18 @@ class TKABoneDensityPipeline:
         self.analyzer = ZonalDensityAnalyzer(voxel_spacing_mm=[0.6, 0.4, 0.4])
         self.biomech = BiomechanicalAnalyzer(precision_error_cv=1.5)
         self.reporter = QuantitativeReportGenerator(output_dir=self.output_dir)
+        self.dicom_io = DicomIOEngine()
+        self.fea_exporter = FEAMeshExporter(voxel_size_mm=[0.6, 0.4, 0.4])
+        self.dashboard = Interactive3DDashboard(output_dir=self.output_dir)
 
     def run_single_time_point(
         self,
         volume_hu: np.ndarray,
         metadata: dict,
-        apply_mar: bool = False
+        apply_mar: bool = False,
+        export_dicom: bool = True,
+        export_fea: bool = True,
+        export_3d_html: bool = True
     ) -> dict:
         """
         Processes a single CT acquisition (e.g. baseline post-op or follow-up).
@@ -157,16 +167,48 @@ class TKABoneDensityPipeline:
         json_path = self.reporter.generate_json_report(patient_id, study_date, payload)
         md_path = self.reporter.generate_markdown_report(patient_id, study_date, payload)
 
-        print(f"  [OK] Artifacts generated:")
-        print(f"       Overlay:  {img_path}")
-        print(f"       JSON:     {json_path}")
-        print(f"       Markdown: {md_path}")
-
-        payload["artifacts"] = {
+        artifacts = {
             "image_overlay": img_path,
             "json_report": json_path,
             "markdown_summary": md_path
         }
+
+        # ADVANCED MODULE 1: Real DICOM Parametric Series Export
+        if export_dicom:
+            print("[DICOM Export] Exporting calibrated vBMD volume as DICOM series...")
+            dicom_subfolder = os.path.join(self.output_dir, f"{patient_id}_DICOM_vBMD")
+            dcm_files = self.dicom_io.export_vbmd_as_dicom_series(
+                corr_vbmd, metadata, dicom_subfolder
+            )
+            artifacts["dicom_series_dir"] = dicom_subfolder
+            print(f"  [OK] Exported {len(dcm_files)} DICOM slices to {dicom_subfolder}")
+
+        # ADVANCED MODULE 2: Biomechanical FEA Meshing & Solver Input Decks
+        if export_fea:
+            print("[FEA Exporter] Generating 3D tetrahedral mesh and Abaqus/FEBio decks...")
+            mesh_data = self.fea_exporter.generate_voxel_tetrahedral_mesh(
+                label_map, corr_vbmd, subsample_stride=3
+            )
+            inp_path = os.path.join(self.output_dir, f"{patient_id}_biomechanical_model.inp")
+            feb_path = os.path.join(self.output_dir, f"{patient_id}_biomechanical_model.feb")
+            self.fea_exporter.export_abaqus_inp(mesh_data, inp_path)
+            self.fea_exporter.export_febio_xml(mesh_data, feb_path)
+            artifacts["fea_abaqus_inp"] = inp_path
+            artifacts["fea_febio_xml"] = feb_path
+            print(f"  [OK] FEA Mesh: {mesh_data['num_nodes']} nodes, {mesh_data['num_elements']} tets.")
+            print(f"       Abaqus Deck: {inp_path}")
+            print(f"       FEBio Deck:  {feb_path}")
+
+        # ADVANCED MODULE 3: Interactive 3D Web Dashboard
+        if export_3d_html:
+            print("[3D Dashboard] Rendering interactive 3D WebGL dashboard...")
+            html_path = self.dashboard.generate_interactive_3d_html(
+                corr_vbmd, metal_mask, bone_mask, patient_id=patient_id
+            )
+            artifacts["interactive_3d_html"] = html_path
+            print(f"  [OK] 3D Dashboard: {html_path}")
+
+        payload["artifacts"] = artifacts
         payload["arrays"] = {
             "recon_hu": recon_hu,
             "corr_vbmd": corr_vbmd,
@@ -210,7 +252,7 @@ class TKABoneDensityPipeline:
         )
 
         res_foll["longitudinal_comparison"] = long_comp
-        # Regenerate updated clinical markdown report
+        # Regenerate updated clinical reports with longitudinal tables
         self.reporter.generate_markdown_report(
             meta_foll["PatientID"], meta_foll["StudyDate"], res_foll
         )
