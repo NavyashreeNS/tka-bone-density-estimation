@@ -1,0 +1,35 @@
+{
+  "protocol_name": "TKA_Quantitative_vBMD_DECT_v2.4",
+  "modality": "Dual-Energy Computed Tomography (DECT)",
+  "scanner_requirements": {
+    "min_detector_rows": 64,
+    "dual_energy_type": "Dual-Source or Fast-kVp Switching",
+    "gantry_bore_diameter_mm": 700
+  },
+  "acquisition_parameters": {
+    "tube_voltage_low_kvp": 80,
+    "tube_voltage_high_kvp": 150,
+    "tin_filter_high_kvp": true,
+    "tube_current_time_product_mas": 300,
+    "rotation_time_sec": 0.5,
+    "helical_pitch": 0.6,
+    "detector_collimation_mm": "128 x 0.6",
+    "reconstruction_kernel": "Medium Smooth Bone (e.g., Qr44 / I40)",
+    "slice_thickness_mm": 0.6,
+    "slice_increment_mm": 0.4,
+    "matrix_size": [512, 512],
+    "field_of_view_mm": 180
+  },
+  "radiation_dose_limits": {
+    "max_ctdi_vol_mgy": 18.0,
+    "max_dlp_mgy_cm": 300.0,
+    "knee_conversion_factor_k": 0.0008,
+    "max_effective_dose_msv": 0.25
+  },
+  "calibration_phantom": {
+    "model": "Mindways Solid QCT Phantom / CIRS Model 062M",
+    "insert_concentrations_mg_ha_cm3": [0, 50, 100, 200, 400],
+    "rod_diameter_mm": 12.0,
+    "position": "Posterior placement in dedicated carbon-fiber positioning splint"
+  }
+}

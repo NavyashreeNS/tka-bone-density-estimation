@@ -1,0 +1,360 @@
+{
+  "patient_id": "TKA_PATIENT_001_LONGITUDINAL",
+  "study_date": "2027-09-29",
+  "pipeline_version": "2.4.0-TKA-QCT",
+  "results": {
+    "metadata": {
+      "KVP": 140,
+      "SliceThickness": 0.6,
+      "PixelSpacing": [
+        0.4,
+        0.4
+      ],
+      "CTDIvol": 14.2,
+      "DLP": 215.0,
+      "IsDualEnergy": false,
+      "PhantomIncluded": true,
+      "PhantomRods": [
+        {
+          "concentration_mg_ha_cm3": 0.0,
+          "expected_hu": -50.0,
+          "center": [
+            18,
+            64,
+            12
+          ],
+          "radius_voxels": 3.0
+        },
+        {
+          "concentration_mg_ha_cm3": 50.0,
+          "expected_hu": 50.0,
+          "center": [
+            18,
+            64,
+            24
+          ],
+          "radius_voxels": 3.0
+        },
+        {
+          "concentration_mg_ha_cm3": 100.0,
+          "expected_hu": 150.0,
+          "center": [
+            18,
+            64,
+            36
+          ],
+          "radius_voxels": 3.0
+        },
+        {
+          "concentration_mg_ha_cm3": 200.0,
+          "expected_hu": 350.0,
+          "center": [
+            18,
+            64,
+            48
+          ],
+          "radius_voxels": 3.0
+        },
+        {
+          "concentration_mg_ha_cm3": 400.0,
+          "expected_hu": 750.0,
+          "center": [
+            18,
+            64,
+            60
+          ],
+          "radius_voxels": 3.0
+        }
+      ],
+      "PatientID": "TKA_PATIENT_001_LONGITUDINAL",
+      "StudyDate": "2027-09-29"
+    },
+    "validation": {
+      "is_valid": true,
+      "effective_dose_msv": 0.172,
+      "errors": [],
+      "warnings": [],
+      "passed_specs": {
+        "kVp": 140,
+        "CTDIvol": 14.2,
+        "DLP": 215.0,
+        "SliceThickness": 0.6,
+        "PhantomIncluded": true
+      }
+    },
+    "segmentation": {
+      "background": 76340,
+      "metal": 3893,
+      "cement": 10845,
+      "trabecular_bone": 80305,
+      "cortical_bone": 15241
+    },
+    "anatomical_frame": {
+      "origin": [
+        26.464475950178223,
+        36.31146621811045,
+        35.97384757098803
+      ],
+      "longitudinal_axis": [
+        0.0008211491615567225,
+        0.9279023432426746,
+        0.372822433765469
+      ],
+      "covariance_eigenvalues": [
+        27.081624347547162,
+        304.29392512684603,
+        324.020144694396
+      ]
+    },
+    "calibration": {
+      "method": "synchronous_phantom",
+      "slope": 0.5,
+      "intercept": 25.0,
+      "r_squared": 1.0,
+      "measured_hus": [
+        -50.0,
+        50.0,
+        150.0,
+        350.0,
+        750.0
+      ],
+      "known_densities": [
+        0.0,
+        50.0,
+        100.0,
+        200.0,
+        400.0
+      ]
+    },
+    "zonal_analysis": {
+      "anatomical_zones": {
+        "Zone_1_Medial_SubPlate": {
+          "voxel_count": 8846,
+          "volume_cm3": 0.849,
+          "mean_vbmd": 697.61,
+          "std_vbmd": 1346.46,
+          "median_vbmd": 51.53,
+          "pct_resorbed_low_density": 67.92
+        },
+        "Zone_2_Lateral_SubPlate": {
+          "voxel_count": 9055,
+          "volume_cm3": 0.869,
+          "mean_vbmd": 737.8,
+          "std_vbmd": 1368.6,
+          "median_vbmd": 54.04,
+          "pct_resorbed_low_density": 60.6
+        },
+        "Zone_3_Anterior_Margin": {
+          "voxel_count": 16205,
+          "volume_cm3": 1.556,
+          "mean_vbmd": 189.38,
+          "std_vbmd": 437.05,
+          "median_vbmd": 55.33,
+          "pct_resorbed_low_density": 60.67
+        },
+        "Zone_4_Posterior_Margin": {
+          "voxel_count": 17189,
+          "volume_cm3": 1.65,
+          "mean_vbmd": 201.9,
+          "std_vbmd": 450.72,
+          "median_vbmd": 76.18,
+          "pct_resorbed_low_density": 55.06
+        },
+        "Zone_5_PeriKeel_Central": {
+          "voxel_count": 4457,
+          "volume_cm3": 0.428,
+          "mean_vbmd": 557.0,
+          "std_vbmd": 1053.49,
+          "median_vbmd": 140.0,
+          "pct_resorbed_low_density": 12.39
+        },
+        "Zone_6_Distal_Stem_Apex": {
+          "voxel_count": 27686,
+          "volume_cm3": 2.658,
+          "mean_vbmd": 160.87,
+          "std_vbmd": 314.42,
+          "median_vbmd": 51.91,
+          "pct_resorbed_low_density": 58.82
+        },
+        "Zone_7_Diaphyseal_Baseline": {
+          "voxel_count": 16565,
+          "volume_cm3": 1.59,
+          "mean_vbmd": 136.96,
+          "std_vbmd": 176.27,
+          "median_vbmd": 50.75,
+          "pct_resorbed_low_density": 59.41
+        }
+      },
+      "distance_shells": {
+        "Shell_A_0.0_to_0.5mm": {
+          "voxel_count": 824,
+          "volume_cm3": 0.079,
+          "mean_vbmd": 4061.75,
+          "std_vbmd": 49.97,
+          "median_vbmd": 4061.92,
+          "pct_resorbed_low_density": 0.0
+        },
+        "Shell_B_0.5_to_1.0mm": {
+          "voxel_count": 2291,
+          "volume_cm3": 0.22,
+          "mean_vbmd": 3886.76,
+          "std_vbmd": 521.85,
+          "median_vbmd": 4058.51,
+          "pct_resorbed_low_density": 0.26
+        },
+        "Shell_C_1.0_to_2.0mm": {
+          "voxel_count": 1381,
+          "volume_cm3": 0.133,
+          "mean_vbmd": 611.18,
+          "std_vbmd": 155.02,
+          "median_vbmd": 651.4,
+          "pct_resorbed_low_density": 7.17
+        },
+        "Shell_D_2.0_to_3.0mm": {
+          "voxel_count": 3657,
+          "volume_cm3": 0.351,
+          "mean_vbmd": 315.88,
+          "std_vbmd": 272.36,
+          "median_vbmd": 140.0,
+          "pct_resorbed_low_density": 26.47
+        },
+        "Shell_E_3.0_to_5.0mm": {
+          "voxel_count": 16136,
+          "volume_cm3": 1.549,
+          "mean_vbmd": 152.84,
+          "std_vbmd": 155.28,
+          "median_vbmd": 125.98,
+          "pct_resorbed_low_density": 33.19
+        }
+      }
+    },
+    "biomechanics": {
+      "max_modulus_mpa": 25000.0,
+      "mean_trabecular_modulus_mpa": 19.87247085571289,
+      "loosening_vulnerability": {
+        "loosening_vulnerability_index": 0.0,
+        "interface_low_density_pct": 0.0,
+        "clinical_risk_category": "LOW_RISK"
+      }
+    },
+    "artifacts": {
+      "image_overlay": "C:\\Users\\ishwa\\.gemini\\antigravity\\scratch\\bonedensity_estimation\\output\\TKA_PATIENT_001_LONGITUDINAL_radiological_density_overlay.png",
+      "json_report": "C:\\Users\\ishwa\\.gemini\\antigravity\\scratch\\bonedensity_estimation\\output\\TKA_PATIENT_001_LONGITUDINAL_quantitative_report.json",
+      "markdown_summary": "C:\\Users\\ishwa\\.gemini\\antigravity\\scratch\\bonedensity_estimation\\output\\TKA_PATIENT_001_LONGITUDINAL_clinical_summary.md"
+    },
+    "longitudinal_comparison": {
+      "anatomical_zones": {
+        "Zone_1_Medial_SubPlate": {
+          "baseline_vbmd": 706.06,
+          "followup_vbmd": 697.61,
+          "delta_vbmd": -8.45,
+          "pct_change": -1.2,
+          "lsc_threshold_pct": 4.16,
+          "is_biologically_significant": false,
+          "classification": "STABLE"
+        },
+        "Zone_2_Lateral_SubPlate": {
+          "baseline_vbmd": 727.94,
+          "followup_vbmd": 737.8,
+          "delta_vbmd": 9.86,
+          "pct_change": 1.35,
+          "lsc_threshold_pct": 4.16,
+          "is_biologically_significant": false,
+          "classification": "STABLE"
+        },
+        "Zone_3_Anterior_Margin": {
+          "baseline_vbmd": 190.37,
+          "followup_vbmd": 189.38,
+          "delta_vbmd": -0.99,
+          "pct_change": -0.52,
+          "lsc_threshold_pct": 4.16,
+          "is_biologically_significant": false,
+          "classification": "STABLE"
+        },
+        "Zone_4_Posterior_Margin": {
+          "baseline_vbmd": 204.96,
+          "followup_vbmd": 201.9,
+          "delta_vbmd": -3.06,
+          "pct_change": -1.49,
+          "lsc_threshold_pct": 4.16,
+          "is_biologically_significant": false,
+          "classification": "STABLE"
+        },
+        "Zone_5_PeriKeel_Central": {
+          "baseline_vbmd": 570.99,
+          "followup_vbmd": 557.0,
+          "delta_vbmd": -13.99,
+          "pct_change": -2.45,
+          "lsc_threshold_pct": 4.16,
+          "is_biologically_significant": false,
+          "classification": "STABLE"
+        },
+        "Zone_6_Distal_Stem_Apex": {
+          "baseline_vbmd": 161.06,
+          "followup_vbmd": 160.87,
+          "delta_vbmd": -0.19,
+          "pct_change": -0.12,
+          "lsc_threshold_pct": 4.16,
+          "is_biologically_significant": false,
+          "classification": "STABLE"
+        },
+        "Zone_7_Diaphyseal_Baseline": {
+          "baseline_vbmd": 137.1,
+          "followup_vbmd": 136.96,
+          "delta_vbmd": -0.14,
+          "pct_change": -0.1,
+          "lsc_threshold_pct": 4.16,
+          "is_biologically_significant": false,
+          "classification": "STABLE"
+        }
+      },
+      "distance_shells": {
+        "Shell_A_0.0_to_0.5mm": {
+          "baseline_vbmd": 4061.75,
+          "followup_vbmd": 4061.75,
+          "delta_vbmd": 0.0,
+          "pct_change": 0.0,
+          "lsc_threshold_pct": 4.16,
+          "is_biologically_significant": false,
+          "classification": "STABLE"
+        },
+        "Shell_B_0.5_to_1.0mm": {
+          "baseline_vbmd": 3901.88,
+          "followup_vbmd": 3886.76,
+          "delta_vbmd": -15.12,
+          "pct_change": -0.39,
+          "lsc_threshold_pct": 4.16,
+          "is_biologically_significant": false,
+          "classification": "STABLE"
+        },
+        "Shell_C_1.0_to_2.0mm": {
+          "baseline_vbmd": 648.9,
+          "followup_vbmd": 611.18,
+          "delta_vbmd": -37.72,
+          "pct_change": -5.81,
+          "lsc_threshold_pct": 4.16,
+          "is_biologically_significant": true,
+          "classification": "RESORPTION_STRESS_SHIELDING"
+        },
+        "Shell_D_2.0_to_3.0mm": {
+          "baseline_vbmd": 318.41,
+          "followup_vbmd": 315.88,
+          "delta_vbmd": -2.53,
+          "pct_change": -0.79,
+          "lsc_threshold_pct": 4.16,
+          "is_biologically_significant": false,
+          "classification": "STABLE"
+        },
+        "Shell_E_3.0_to_5.0mm": {
+          "baseline_vbmd": 154.48,
+          "followup_vbmd": 152.84,
+          "delta_vbmd": -1.64,
+          "pct_change": -1.06,
+          "lsc_threshold_pct": 4.16,
+          "is_biologically_significant": false,
+          "classification": "STABLE"
+        }
+      }
+    }
+  }
+}
